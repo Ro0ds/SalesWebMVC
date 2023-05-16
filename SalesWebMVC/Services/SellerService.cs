@@ -19,5 +19,12 @@ namespace SalesWebMVC.Services
         {
             return _conext.Seller.ToList();
         }
+
+
+        public void Insert(Seller obj)
+        {
+            _conext.Add(obj);
+            _conext.SaveChanges();
+        }
     }
 }
