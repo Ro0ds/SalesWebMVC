@@ -8,23 +8,35 @@ namespace SalesWebMVC.Services
 {
     public class SellerService
     {
-        private readonly SalesWebMVCContext _conext;
+        private readonly SalesWebMVCContext _context;
 
         public SellerService(SalesWebMVCContext context)
         {
-            _conext = context;
+            _context = context;
         }
 
         public List<Seller> FindAll()
         {
-            return _conext.Seller.ToList();
+            return _context.Seller.ToList();
         }
 
 
         public void Insert(Seller obj)
         {
-            _conext.Add(obj);
-            _conext.SaveChanges();
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
+
+        public Seller FindByID(int id)
+        {
+            return _context.Seller.FirstOrDefault(obj => obj.Id == id);
+        }
+
+        public void Remove(int id)
+        {
+            var obj = _context.Seller.Find(id);
+            _context.Seller.Remove(obj);
+            _context.SaveChanges();
         }
     }
 }
